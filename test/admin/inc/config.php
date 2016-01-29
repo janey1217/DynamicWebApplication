@@ -15,7 +15,7 @@
 	$oFCKeditor->Width = '95%';
 	$oFCKeditor->Value = '';*/
 
-	$db=new mysql("localhost","root","111111","mytest","gb2312");
+	$db=new mysql("localhost","root","","test","gb2312");
 	//$db=new mysql("61.152.96.248","sq_yiqianjia","jasdhgf","sq_yiqianjia","utf-8");
 	
 ?>

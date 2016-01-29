@@ -54,10 +54,11 @@ require_once("header.php");
 				$result = mysql_query($sql);
 				while( $row=mysql_fetch_array($result) )
 				{
+					//echo $row['title'];
 			?>
 		<dd>
-		<a href="showIndustry.php?id=<? echo $row['id'] ?>" target="_blank">
-		<? echo $row["title"] ?>		
+		<a href="showIndustry.php?id=<?php echo $row['id']  ?>" target="_blank">
+		<?php echo $row["title"] ?>
 		</a>
 		</dd>
 		<!--<dd>
@@ -97,8 +98,8 @@ require_once("header.php");
 				{
 			?>
 		<dd>
-		<a href="showNews.php?id=<? echo $row['id'] ?>" target="_blank">
-		<? echo $row["title"] ?>		
+		<a href="showNews.php?id=<?php echo $row['id'] ?>" target="_blank">
+		<?php echo $row["title"] ?>
 		</a>
 		</dd>
 		<!--<dd>
@@ -136,8 +137,8 @@ require_once("header.php");
 				{
 			?>
 		<dd>
-		<a href="showgsgg.php?id=<? echo $row['id'] ?>" target="_blank">
-		<? echo $row["title"] ?>		
+		<a href="showgsgg.php?id=<?php echo $row['id'] ?>" target="_blank">
+		<?php echo $row["title"] ?>
 		</a>
 		</dd>
 		<!--<dd>

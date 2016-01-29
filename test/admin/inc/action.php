@@ -5,7 +5,7 @@
 		$query=$db->query("select * from `admin` where `username`='$username'");
 		
 		$user=is_array($row=$db->fetch_array($query));
-		if($_SESSION["code"]==$isval)//ÅÐ¶ÏÓÃ»§µÇÂ¼
+		if($_SESSION["code"]==$isval)
 		{
 			if($user>0)
 			{
@@ -19,39 +19,39 @@
 				}
 				else
 				{
-					Show_msg("login.php","ÃÜÂë´íÎó£¡");
+					Show_msg("login.php","å¯†ç é”™è¯¯");
 					session_destroy();					
 				}
 			}else
 			{
-				Show_msg("login.php","¸ÃÓÃ»§Ãû²»´æÔÚ£¡");
+				Show_msg("login.php","è¯¥ç”¨æˆ·ä¸å­˜åœ¨");
 				session_destroy();
 			}
 		}else
 		{
-			echo Show_msg("login.php","ÑéÖ¤Âë´íÎó£¡");			
+			echo Show_msg("login.php","éªŒè¯ç é”™è¯¯");
 		}
 	}
 	
-	function Show_msg($url, $show)//µ¯³öÐÅÏ¢
+	function Show_msg($url, $show)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	{
 		$msg = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 				<html xmlns="http://www.w3.org/1999/xhtml"><head>
 						<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 						<link rel="stylesheet" href="css/common.css" type="text/css" />
 						<meta http-equiv="refresh" content="2; URL=' . $url . '" />
-						<title>ÐÅÏ¢ÌáÊ¾</title>
+						<title>ï¿½ï¿½Ï¢ï¿½ï¿½Ê¾</title>
 						</head>
 						<body>
 						<div id="man_zone">
 						  <table width="30%" border="1" align="center"  cellpadding="3" cellspacing="0" class="table" style="margin-top:100px;">
 							<tr>
-							  <th align="center" style="background:#cef; font-size:12px;">ÐÅÏ¢ÌáÊ¾</th>
+							  <th align="center" style="background:#cef; font-size:12px;">ï¿½ï¿½Ï¢ï¿½ï¿½Ê¾</th>
 							</tr>
 							<tr>
 							  <td style="line-height:22px; font-size:12px;"><p><font color="#ff0000;"><b>' . $show . '</b></font><br />
-							  2Ãëºó·µ»ØÖ¸¶¨Ò³Ãæ£¡<br />
-							  Èç¹ûä¯ÀÀÆ÷ÎÞ·¨Ìø×ª£¬<a href="' . $url . '">Çëµã»÷´Ë´¦</a>¡£</p></td>
+							  2ï¿½ï¿½ó·µ»ï¿½Ö¸ï¿½ï¿½Ò³ï¿½æ£¡<br />
+							  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½×ªï¿½ï¿½<a href="' . $url . '">ï¿½ï¿½ï¿½ï¿½ï¿½Ë´ï¿½</a>ï¿½ï¿½</p></td>
 							</tr>
 						  </table>
 						</div>
@@ -60,7 +60,7 @@
 		echo $msg;
 		exit ();
 	}
-	function Isuser()//ÅÐ¶ÏÓÃ»§ÊÇ·ñµÇÂ¼
+	function Isuser()//ï¿½Ð¶ï¿½ï¿½Ã»ï¿½ï¿½Ç·ï¿½ï¿½Â¼
 	{
 		global $db;
 		$query=$db->query("select * from `admin` where `id`='$_SESSION[admin_id]'");
@@ -69,23 +69,23 @@
 		{
 			if(md5($row["username"].$row["userpwd"])!=$_SESSION["admin_username"])
 			{
-				Show_msg("login.php","²Ù×÷´íÎó£¡");
+				Show_msg("login.php","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				session_destroy();
 				exit();
 			}
 		}else
 		{
-			Show_msg("login.php","²Ù×÷´íÎó£¡");
+			Show_msg("login.php","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			session_destroy();
 			exit();
 		}
 	}
-	function Chaoshi()//ÅÐ¶ÏÓÃ»§µÇÂ¼³¬Ê±
+	function Chaoshi()//ï¿½Ð¶ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ê±
 	{
 		$newtime=mktime();
 		if($newtime-$_SESSION["admin_times"]>'10000')
 		{
-			Show_msg("login.php","µÇÂ¼³¬Ê±£¡");
+			Show_msg("login.php","ï¿½ï¿½Â¼ï¿½ï¿½Ê±ï¿½ï¿½");
 			session_destroy();
 			exit();
 		}else
@@ -93,12 +93,12 @@
 			$_SESSION["admin_times"]=mktime();
 		}
 	}
-	function Deldy($tb,$zd)//É¾³ýµ¥Ò»¼ÇÂ¼
+	function Deldy($tb,$zd)//É¾ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Â¼
 	{
 		global $db;
 		$db->query("delete from $tb where `id`=$zd limit 1");		
 	}
-	function Delall($tb,$zd,$chk)//É¾³ýËùÑ¡ÖÐµÄ¼ÇÂ¼
+	function Delall($tb,$zd,$chk)//É¾ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ÐµÄ¼ï¿½Â¼
 	{
 		global $db;
 		$ID_Dele=implode(",",$chk);
