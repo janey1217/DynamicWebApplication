@@ -26,7 +26,45 @@ if($flag ==1){
 <link href="lib/css/myPage.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
     function loadData(num) {
-        // $("#PageCount").val("89");
+        console.log(num);
+        $pageCount = $('#visiblePages').val();
+        $.ajax({
+            type:'POST',
+            url:'mypage.php',
+            data:{'num':num,'pageCount':$pageCount},
+            success:function(data){
+                if(data!=null){
+                    var strs ="";
+                    var json = $.parseJSON(data);
+                    $(json).each(function(i,val){
+                        var tr='<tr>';
+                        $.each(val,function(k,v){
+                            tr+='<td>'+v+'</td>';
+                        });
+                        tr +='</tr>';
+                        strs +=tr;
+                    });
+                    $('#carinfo tbody').html(strs);
+                    //console.log(data);
+                    //for (var i=0; i<data.length; i++)
+                    //{
+                    //        var tr='<tr>';
+                    //        tr+='<td>'+data[i]['Id']+'</td>';
+                    //        tr+='<td>'+data[i]['vsp']+'</td>';
+                    //        tr+='<td>'+data[i]['vrpm']+'</td>';
+                    //        tr+='<td>'+data[i]['tmp']+'</td>';
+                    //        tr+='<td>'+data[i]['longi']+'</td>';
+                    //        tr+='<td>'+data[i]['lati']+'</td>';
+                    //        tr+='<td>'+data[i]['insert_date']+'</td>';
+                    //        tr += '</tr>';
+                    //        strs += tr;
+                    //   // console.log(data[i]);
+                    //
+                    //}
+                    //$('#carinfo tbody').html(strs);
+                }
+            },
+        })
     }
 </script>
 <nav class="navbar navbar-default">
@@ -62,7 +100,8 @@ if($flag ==1){
 </nav>
 <div  class="container" style="font-size: 14px">
     <div class="">
-        <table class="table-bordered" style="width: 100%">
+        <table class="table-bordered" id="carinfo" style="width: 100%">
+            <thead>
             <th>编号</th>
             <th>VSP</th>
             <th>VRPM</th>
@@ -70,22 +109,24 @@ if($flag ==1){
             <th>经度</th>
             <th>维度</th>
             <th>时间</th>
-            <?php
-            $sql = "select * from car_info where 1=1 order by insert_date desc";
-            $result = mysql_query($sql);
-            while($row=mysql_fetch_array($result)) {
-               // echo json_encode($row);
-            ?>
-            <tr>
-                <td><?php echo $row["Id"] ?></td>
-                <td><?php echo $row["vsp"] ?></td>
-                <td><?php echo $row["vrpm"] ?></td>
-                <td><?php echo $row["tmp"] ?></td>
-                <td><?php echo $row["longi"] ?></td>
-                <td><?php echo $row["lati"] ?></td>
-                <td><?php echo $row["insert_date"] ?></td>
-            </tr>
-            <?php }?>
+            </thead>
+            <tbody></tbody>
+<?php
+//            $sql = "select * from car_info where 1=1 order by insert_date desc";
+//            $result = mysql_query($sql);
+//            while($row=mysql_fetch_array($result)) {
+//                echo json_encode($row);
+//            ?>
+<!--            <tr>-->
+<!--                <td>--><?php //echo $row["Id"] ?><!--</td>-->
+<!--                <td>--><?php //echo $row["vsp"] ?><!--</td>-->
+<!--                <td>--><?php //echo $row["vrpm"] ?><!--</td>-->
+<!--                <td>--><?php //echo $row["tmp"] ?><!--</td>-->
+<!--                <td>--><?php //echo $row["longi"] ?><!--</td>-->
+<!--                <td>--><?php //echo $row["lati"] ?><!--</td>-->
+<!--                <td>--><?php //echo $row["insert_date"] ?><!--</td>-->
+<!--            </tr>-->
+<!--            --><?php //}?>
         </table>
     </div>
     <div class="pagination">
@@ -93,7 +134,7 @@ if($flag ==1){
         $sql ='select count(*) from car_info';
         $result =mysql_query($sql);
         $count = mysql_fetch_array($result);
-        echo $count[0];
+        //echo $count[0];
         ?>
         <form id="form1" runat="server">
             <div>
@@ -102,10 +143,10 @@ if($flag ==1){
                 <ul class="pagination" id="pagination">
                 </ul>
                 <input type="hidden" id="PageCount" runat="server"  value="<?php echo $count[0] ?>"/>
-                <input type="hidden" id="PageSize" runat="server" value="8" />
-                <input type="hidden" id="countindex" runat="server" value="10"/>
+                <input type="hidden" id="PageSize" runat="server" value="20" />
+                <input type="hidden" id="countindex" runat="server" value="20"/>
                 <!--设置最多显示的页码数 可以手动设置 默认为7-->
-                <input type="hidden" id="visiblePages" runat="server" value="10" />
+                <input type="hidden" id="visiblePages" runat="server" value="20" />
             </div>
             <script src="lib/js/myPage.js" type="text/javascript"></script>
         </form>
